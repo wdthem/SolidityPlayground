@@ -28,7 +28,7 @@ contract FundMe {
         );
         addressToAmountFunded[msg.sender] += msg.value;
         //what the ETH => USD conversion rate
-        funders.push(msg.sender); //ignore the redundanchy risk for purpose of example
+        funders.push(msg.sender); //ignore the redundancy risk for purposes of the example
     }
 
     function getVersion() public view returns (uint256) {
