@@ -42,10 +42,19 @@ abi = compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["abi"]
 
 w3 = Web3(
     # change URL to network, localhost or test network
+    # ganache-cli: http://127.0.0.1:8545
+    # ganache-ui:  http://127.0.0.1:7545
+    # rinkeby via infura acount: https://rinkeby.infura.io/v3/65fc66214b9448829943181bf61b13c5
     Web3.HTTPProvider("https://rinkeby.infura.io/v3/65fc66214b9448829943181bf61b13c5")
 )
-chain_id = 4  # not the network ID. Seems hard-coded in Ganache to 1337
-my_address = "0x9329C226257DEb4BfE94Df8a4A4aaB18F4F7cA42"  # change address to whatever network you are running on
+
+# not the network ID.
+# Seems hard-coded in Ganache to 1337
+# rinkeby is 4
+chain_id = 4
+
+# change address to whatever required for the network you are running on
+my_address = "0x9329C226257DEb4BfE94Df8a4A4aaB18F4F7cA42"
 
 # note: python requires you to add the 0x to the beginning of the private key
 # but you don't see this in ganache
