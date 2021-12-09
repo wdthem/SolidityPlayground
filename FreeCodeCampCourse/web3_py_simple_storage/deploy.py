@@ -45,7 +45,7 @@ w3 = Web3(
     # ganache-cli: http://127.0.0.1:8545
     # ganache-ui:  http://127.0.0.1:7545
     # rinkeby via infura acount: https://rinkeby.infura.io/v3/65fc66214b9448829943181bf61b13c5
-    Web3.HTTPProvider("https://rinkeby.infura.io/v3/65fc66214b9448829943181bf61b13c5")
+    Web3.HTTPProvider(os.getenv("BC_NET_ADDRESS"))
 )
 
 # not the network ID.
@@ -54,7 +54,7 @@ w3 = Web3(
 chain_id = 4
 
 # change address to whatever required for the network you are running on
-my_address = "0x9329C226257DEb4BfE94Df8a4A4aaB18F4F7cA42"
+my_address = os.getenv("ACCOUNT_ADDRESS")
 
 # note: python requires you to add the 0x to the beginning of the private key
 # but you don't see this in ganache
@@ -83,7 +83,7 @@ send_tx = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
 tx_receipt = w3.eth.wait_for_transaction_receipt(send_tx)
 print("Deployed!")
 
-# working with the contract
+# working with the contract - pass in the address from the above transaction
 # contract address
 # contract abi
 simple_storage = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
