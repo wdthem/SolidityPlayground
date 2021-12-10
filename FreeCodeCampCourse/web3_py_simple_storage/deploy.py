@@ -51,7 +51,7 @@ w3 = Web3(
 # not the network ID.
 # Seems hard-coded in Ganache to 1337
 # rinkeby is 4
-chain_id = 4
+chain_id = int(os.getenv("CHAIN_ID"))
 
 # change address to whatever required for the network you are running on
 my_address = os.getenv("ACCOUNT_ADDRESS")
