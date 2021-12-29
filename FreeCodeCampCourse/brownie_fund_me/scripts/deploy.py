@@ -14,7 +14,7 @@ def deploy_fund_me():
     # otherwise, deploy mocks
     if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         price_feed_address = config["networks"][network.show_active()][
-            "eth_usd_price_feed"
+            "eth_usd_price_feed_address"
         ]
     else:
         deploy_mocks()
@@ -25,6 +25,9 @@ def deploy_fund_me():
         {"from": account},
         publish_source=config["networks"][network.show_active()].get("verify"),
     )
+
+    # the above call to .get won't fail if you forget to add the key to config
+
     print(f"Contract deployed to {fund_me.address}")
     return fund_me
 
