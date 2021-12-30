@@ -1,3 +1,4 @@
+from os import link
 from brownie import (
     network,
     config,
@@ -6,6 +7,7 @@ from brownie import (
     VRFCoordinatorMock,
     LinkToken,
     Contract,
+    interface,
 )
 from web3 import Web3
 
@@ -85,3 +87,21 @@ def get_contract(contract_name):
         )
 
     return contract
+
+
+def fund_with_link(
+    contract_address, account=None, link_token=None, amount=100000000000000000
+):  # 0.1 Link
+    account = account if account else get_account()
+    link_token = link_token if link_token else get_contract("link_token")
+
+    # first way of getting contract
+    tx = link_token.transfer(contract_address, amount, {"from": account})
+
+    # another way of getting ABI
+    # link_token_contract = interface.LinkTokenInterface(link_token.address)
+    # tx = link_token_contract.transfer(contract_address, amount, {"from": account})
+
+    tx.wait(1)
+    print("Funded contract!")
+    return tx
