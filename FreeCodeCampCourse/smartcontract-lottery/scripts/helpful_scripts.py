@@ -55,7 +55,7 @@ def deploy_mocks():
 
 # struct to map contract names to mocks
 contract_to_mock = {
-    "eth_usd_price_feed_address": MockV3Aggregator,
+    "eth-usd-price-feed-address": MockV3Aggregator,
     "vrf_coordinator": VRFCoordinatorMock,
     "link_token": LinkToken,
 }
