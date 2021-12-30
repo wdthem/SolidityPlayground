@@ -22,14 +22,14 @@ contract Lottery is VRFConsumerBase, Ownable {
     event RequestedRandomness(bytes32 requestId);
 
     constructor(
-        address priceFeedAddress,
+        address _priceFeedAddress,
         address _vrfCoordinator,
         address _link,
         uint256 _fee,
         bytes32 _keyHash
     ) public VRFConsumerBase(_vrfCoordinator, _link) {
         usdEntryFee = 50 * (10**18);
-        ethUsdPriceFeed = AggregatorV3Interface(priceFeedAddress);
+        ethUsdPriceFeed = AggregatorV3Interface(_priceFeedAddress);
         lottery_state = LOTTERY_STATE.CLOSED;
         fee = _fee;
         keyHash = _keyHash;
@@ -93,14 +93,11 @@ contract Lottery is VRFConsumerBase, Ownable {
             lottery_state == LOTTERY_STATE.CALCULATING_WINNER,
             "You aren't there yet!"
         );
-        require(_randomness > 0, "Random-not-found");
-
-        uint256 idexOfWinner = _randomness % players.length;
-        recentWinner = players[idexOfWinner];
-
+        require(_randomness > 0, "random-not-found");
+        uint256 indexOfWinner = _randomness % players.length;
+        recentWinner = players[indexOfWinner];
         recentWinner.transfer(address(this).balance);
-
-        //reset lottery
+        // Reset
         players = new address payable[](0);
         lottery_state = LOTTERY_STATE.CLOSED;
         randomness = _randomness;
