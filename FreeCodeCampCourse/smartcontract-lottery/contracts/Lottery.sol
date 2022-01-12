@@ -80,7 +80,9 @@ contract Lottery is VRFConsumerBase, Ownable {
         //) % players.length; //this selects the winner from the array based on the random number
         lottery_state = LOTTERY_STATE.CALCULATING_WINNER;
 
-        bytes32 requestId = requestRandomness(keyHash, fee);
+        //from imported VRFConsumerBase.sol
+        //calls chainlink node and pays link token fee
+        bytes32 requestId = requestRandomness(keyHash, fee); 
 
         emit RequestedRandomness(requestId);
     }
