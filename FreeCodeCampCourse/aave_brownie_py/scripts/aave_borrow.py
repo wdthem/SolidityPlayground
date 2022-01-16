@@ -128,10 +128,11 @@ def approve_erc20(amount, spender, erc20_address, account):
 
 
 def get_lending_pool():
-    lending_pool_adresses_provider = interface.ILendingPoolAddressesProvider(
+    # https://docs.aave.com/developers/the-core-protocol/lendingpool
+    lending_pool_addresses_provider = interface.ILendingPoolAddressesProvider(
         config["networks"][network.show_active()]["lending_pool_addresses_provider"]
     )
-    lending_pool_address = lending_pool_adresses_provider.getLendingPool()
+    lending_pool_address = lending_pool_addresses_provider.getLendingPool()
     # ABI
     # Address
     lending_pool = interface.ILendingPool(lending_pool_address)
