@@ -4,7 +4,6 @@
     1. Sell that borrowed asset (short selling) - EXTRA CHALLENGE
 4. Repay everything back
 
-
 Testing:
 
 Integration test: Rinkeby
